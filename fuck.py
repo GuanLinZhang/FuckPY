@@ -1,10 +1,13 @@
-import requests
-from bs4 import BeautifulSoup
+import Article
+import urllib.parse
+
 import Article
 
-base_query_url = "http://zhtnbzz.yiigle.com/search.jspx?q="
-requestParam = "%E6%AF%8D%E4%B9%89%E6%98%8E"
-fuck = Article.getArticlesByPages(base_query_url, requestParam)
-print(len(fuck))
+word = input('请输入文题/作者/关键字\n')
+#
+requestParam = urllib.parse.quote(word)
+
+fuck = Article.getAllArticles(requestParam)
 for m in fuck:
     print(m)
+print("共有: {}条数据", len(fuck))
