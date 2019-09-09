@@ -98,7 +98,7 @@ def getAllArticles(encodedRequestParam):
             count += 1
             # 获取下一页HTML文本
             next_page_text = requests.get(next_url).text
-            single_page_articleList = getSinglePageArticles(next_page_text)
+            single_page_article_list = getSinglePageArticles(next_page_text)
             # 持久化到MongoDB
             db = mongoDB.conn()
             t_article = db.Articles
@@ -107,7 +107,7 @@ def getAllArticles(encodedRequestParam):
             except BulkWriteError as bwe:
                 print(bwe.details)
             # 追加到已有结果List
-            article_list.extend(single_page_articleList)
+            article_list.extend(single_page_article_list)
             # 延迟5s
             time.sleep(3)
             # 追加到结果List
