@@ -1,5 +1,3 @@
-import time
-
 import requests
 from pymongo.errors import BulkWriteError
 from DBHelper import ConnectionHelper

@@ -1,4 +1,3 @@
-import Article
 import urllib.parse
 
 import Article
