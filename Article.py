@@ -2,8 +2,8 @@ import time
 
 import requests
 from pymongo.errors import BulkWriteError
+from DBHelper import ConnectionHelper
 
-import mongoDB
 from bs4 import BeautifulSoup
 
 
@@ -100,7 +100,7 @@ def getAllArticles(encodedRequestParam):
             next_page_text = requests.get(next_url).text
             single_page_article_list = getSinglePageArticles(next_page_text)
             # 持久化到MongoDB
-            db = mongoDB.conn()
+            db = ConnectionHelper().conn()
             t_article = db.Articles
             try:
                 t_article.insert_many(article_list)
@@ -109,7 +109,7 @@ def getAllArticles(encodedRequestParam):
             # 追加到已有结果List
             article_list.extend(single_page_article_list)
             # 延迟5s
-            time.sleep(3)
+            # time.sleep(3)
             # 追加到结果List
 
     return article_list
